@@ -12,6 +12,7 @@ import '../../../../shared/widgets/shimmer.dart';
 import '../../domain/models/category_model.dart';
 import '../../domain/models/product_model.dart';
 import '../providers/fetch_products_provider.dart';
+import '../widgets/filter_bottomsheet.dart';
 import '../widgets/product_widget.dart';
 
 class ProductCatalogue extends ConsumerStatefulWidget {
@@ -24,6 +25,9 @@ class ProductCatalogue extends ConsumerStatefulWidget {
 class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
   int categoryFilter = 0;
   Map<String, dynamic> filterData = {};
+  final TextEditingController minPriceController = TextEditingController();
+  final TextEditingController maxPriceController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,7 @@ class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
         ref.watch(fetchCategoriesProvider);
     final AsyncValue<List<ProductModel>> fetchProducts =
         ref.watch(fetchProductsProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
@@ -157,8 +162,58 @@ class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
                 },
               ),
               const SizedBox(
-                height: 16,
+                height: 12,
               ),
+              Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    onTap: () {
+                      FilterBottomSheet.show(
+                        context,
+                        minPriceController: minPriceController,
+                        maxPriceController: maxPriceController,
+                        key: formKey,
+                        onPressed: () {
+                          //formKey.currentState!.save();
+                          if (minPriceController.text.isNotEmpty) {
+                            filterData['minPrice'] =
+                                double.tryParse(minPriceController.text);
+                          } else {
+                            filterData.remove("minPrice");
+                          }
+                          if (maxPriceController.text.isNotEmpty) {
+                            filterData['maxPrice'] =
+                                double.tryParse(maxPriceController.text);
+                          } else {
+                            filterData.remove("maxPrice");
+                          }
+                          ref
+                              .read(fetchProductsProvider.notifier)
+                              .setFilter(filterData);
+                          Navigator.pop(context);
+                        },
+                        removeFilter: () {
+                          filterData.remove("minPrice");
+                          filterData.remove("maxPrice");
+                          ref
+                              .read(fetchProductsProvider.notifier)
+                              .setFilter(filterData);
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                    child: Ink(
+                      padding: const EdgeInsets.all(4),
+                      child: SvgPicture.asset(
+                        "assets/svgs/filter.svg",
+                        colorFilter: const ColorFilter.mode(
+                          AppColors.appDark700,
+                          BlendMode.srcIn,
+                        ),
+                        fit: BoxFit.scaleDown,
+                      ),
+                    ),
+                  )),
               fetchProducts.when(
                   data: (value) {
                     return ResponsiveGridList(
