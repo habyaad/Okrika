@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: 200,
+            width: 50,
             child: LoadingIndicator(
               indicatorType: Indicator.orbit,
               colors: [Colors.blueGrey, Colors.redAccent],
