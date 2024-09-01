@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:okrika/shared/services/logger_service.dart';
 import 'package:okrika/shared/utils/app_strings.dart';
 import 'package:sqflite/sqflite.dart';
 import '../../../../shared/services/database_helper/domain/repositories/database_helper_repo.dart';
@@ -28,14 +29,15 @@ class ProductRemoteDataSource implements ProductDataSource {
     try {
       List<Map<String, Object?>> response =
           await db.query(AppStrings.CATEGORY_TABLE_NAME);
-      if (kDebugMode) {
-        print("Product categories:: $response");
-      }
+      LoggerService.info("Product Categories:: ${response.toString()}");
+
       return CategoryModel.parseCategoryList(response);
     } catch (e) {
       if (kDebugMode) {
         print("Error $e");
       }
+      LoggerService.error(e.toString());
+
       rethrow;
     }
   }
@@ -52,15 +54,11 @@ class ProductRemoteDataSource implements ProductDataSource {
         AppStrings.columnPrice,
         AppStrings.columnCoverImage
       ]);
-      if (kDebugMode) {
-        print("Products:: $response");
-      }
+      LoggerService.info("Products:: ${response.toString()}");
 
       return ProductModel.parseProductList(response);
     } catch (e) {
-      if (kDebugMode) {
-        print("Error $e");
-      }
+      LoggerService.error(e.toString());
       rethrow;
     }
   }
@@ -74,15 +72,11 @@ class ProductRemoteDataSource implements ProductDataSource {
           AppStrings.PRODUCT_TABLE_NAME,
           where: '${AppStrings.columnId} = ?',
           whereArgs: [id]);
-      if (kDebugMode) {
-        print("Products:: $response");
-      }
+      LoggerService.info("Product:: ${response.toString()}");
 
       return ProductModel.fromJson(response[0]);
     } catch (e) {
-      if (kDebugMode) {
-        print("Error $e");
-      }
+      LoggerService.error(e.toString());
       rethrow;
     }
   }
@@ -132,15 +126,11 @@ class ProductRemoteDataSource implements ProductDataSource {
         whereArgs: whereArgs.isNotEmpty ? whereArgs : null,
       );
 
-      if (kDebugMode) {
-        print("Products:: $response");
-      }
+      LoggerService.info("Products:: ${response.toString()}");
 
       return response.map((product) => ProductModel.fromJson(product)).toList();
     } catch (e) {
-      if (kDebugMode) {
-        print("Error $e");
-      }
+      LoggerService.error(e.toString());
       rethrow;
     }
   }
@@ -152,13 +142,10 @@ class ProductRemoteDataSource implements ProductDataSource {
     try {
       int response = await db.delete(AppStrings.PRODUCT_TABLE_NAME,
           where: '${AppStrings.columnId} = ?', whereArgs: [id]);
-      if (kDebugMode) {
-        print("Products:: $response");
-      }
+
+      LoggerService.info("Products:: ${response.toString()}");
     } catch (e) {
-      if (kDebugMode) {
-        print("Error $e");
-      }
+      LoggerService.error(e.toString());
       rethrow;
     }
   }
