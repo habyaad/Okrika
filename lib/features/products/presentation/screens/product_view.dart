@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:okrika/features/products/domain/models/product_model.dart';
@@ -137,19 +138,52 @@ class ProductView extends ConsumerWidget {
                                     title: "Price",
                                     weight: FontWeight.w500,
                                     color: AppColors.medium300,
-                                    size: 14,
+                                    size: 12,
                                   ),
                                   CustomText(
                                     title: "\$ ${value.price}",
                                     weight: FontWeight.w700,
-                                    size: 20,
+                                    color: AppColors.appOrange,
+                                    size: 16,
                                   ),
                                 ],
                               )
                             ],
                           ),
                           const SizedBox(
-                            height: 24,
+                            height: 12,
+                          ),
+                          Row(
+                            children: [
+                              RatingBar.builder(
+                                initialRating: 4.5,
+                                itemSize: 14,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemPadding:
+                                    const EdgeInsets.symmetric(horizontal: 1.0),
+                                itemBuilder: (context, _) => const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (rating) {
+                                  if (kDebugMode) {
+                                    print(rating);
+                                  }
+                                },
+                              ),
+                              const CustomText(
+                                title: "4.5(2,400 reviews)",
+                                weight: FontWeight.w600,
+                                size: 12,
+                                overflow: TextOverflow.clip,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
                           ),
                           SizedBox(
                             height: 70,
@@ -201,6 +235,108 @@ class ProductView extends ConsumerWidget {
                             color: AppColors.medium300,
                             overflow: TextOverflow.clip,
                           ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                title: "Reviews",
+                                weight: FontWeight.w600,
+                                size: 16,
+                                overflow: TextOverflow.clip,
+                              ),
+                              CustomText(
+                                title: "See all",
+                                weight: FontWeight.w400,
+                                size: 14,
+                                color: AppColors.medium300,
+                                overflow: TextOverflow.clip,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 25,
+                                    backgroundImage: AssetImage(
+                                        "assets/images/product-1.png"),
+                                  ),
+                                  SizedBox(
+                                    width: 12,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                        title: "John Doe",
+                                        weight: FontWeight.w600,
+                                        size: 14,
+                                        overflow: TextOverflow.clip,
+                                      ),
+                                      CustomText(
+                                        title: "13, Sept 2020",
+                                        weight: FontWeight.w400,
+                                        size: 12,
+                                        color: AppColors.medium300,
+                                        overflow: TextOverflow.clip,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  const CustomText(
+                                    title: "4.1 Rating",
+                                    weight: FontWeight.w400,
+                                    size: 12,
+                                    overflow: TextOverflow.clip,
+                                  ),
+                                  RatingBar.builder(
+                                    initialRating: 4,
+                                    itemSize: 14,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    itemPadding: const EdgeInsets.symmetric(
+                                        horizontal: 1.0),
+                                    itemBuilder: (context, _) => const Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      if (kDebugMode) {
+                                        print(rating);
+                                      }
+                                    },
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          const CustomText(
+                            title:
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque malesuada eget vitae amet...",
+                            size: 14,
+                            color: AppColors.medium300,
+                            overflow: TextOverflow.clip,
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          )
                         ],
                       ),
                     )
