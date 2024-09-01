@@ -10,5 +10,4 @@ class AppStrings {
   static const columnCategory = 'category';
   static const columnPrice = 'price';
   static const columnCoverImage = 'imageUrl';
-
 }

@@ -1,4 +1,3 @@
-import 'package:okrika/features/products/domain/models/category_model.dart';
 import 'package:okrika/features/products/domain/models/product_model.dart';
 import 'package:okrika/features/products/domain/providers/product_catalogue_provider.dart';
 import 'package:okrika/features/products/domain/repositories/product_catalogue_repo.dart';

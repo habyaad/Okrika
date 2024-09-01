@@ -16,8 +16,8 @@ class CustomShimmer extends StatelessWidget {
         enabled: true,
         //Default value
         direction: ShimmerDirection.ltr,
-        gradient:
-            LinearGradient(colors: [Colors.white, Colors.grey.withOpacity(.01)]),
+        gradient: LinearGradient(
+            colors: [Colors.white, Colors.grey.withOpacity(.01)]),
         child: Container(
           decoration: BoxDecoration(
               color: AppColors.appGrey, borderRadius: BorderRadius.circular(8)),

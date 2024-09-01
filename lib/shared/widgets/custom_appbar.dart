@@ -17,23 +17,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const CustomAppBar(
       {super.key,
-        required this.title,
-        this.suffixIcon,
-        this.onPressed,
-        this.prefixIcon,
-        this.flexibleSpace,
-        this.bgColor,
-        this.titleColor,
-        this.verticalPadding,
-        this.centerTitle,
-        this.automaticallyImplyLeading,
-        this.showBorder = false});
+      required this.title,
+      this.suffixIcon,
+      this.onPressed,
+      this.prefixIcon,
+      this.flexibleSpace,
+      this.bgColor,
+      this.titleColor,
+      this.verticalPadding,
+      this.centerTitle,
+      this.automaticallyImplyLeading,
+      this.showBorder = false});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:
-      EdgeInsets.symmetric(horizontal: 10, vertical: verticalPadding ?? 0),
+          EdgeInsets.symmetric(horizontal: 10, vertical: verticalPadding ?? 0),
       child: AppBar(
         flexibleSpace: flexibleSpace,
         scrolledUnderElevation: 0,
@@ -43,12 +43,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: bgColor ?? Colors.white,
         bottom: showBorder
             ? PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            color: AppColors.appLight30,
-            height: 1.0,
-          ),
-        )
+                preferredSize: const Size.fromHeight(1.0),
+                child: Container(
+                  color: AppColors.appLight30,
+                  height: 1.0,
+                ),
+              )
             : null,
         title: CustomText(
           title: title,

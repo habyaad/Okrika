@@ -6,8 +6,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'fetch_categories_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<List<CategoryModel>> fetchCategories(
-    FetchCategoriesRef ref) async {
-  final ProductCatalogueRepository productRepo = ref.read(productCatalogueProvider);
+Future<List<CategoryModel>> fetchCategories(FetchCategoriesRef ref) async {
+  final ProductCatalogueRepository productRepo =
+      ref.read(productCatalogueProvider);
   return await productRepo.fetchCategories();
 }
