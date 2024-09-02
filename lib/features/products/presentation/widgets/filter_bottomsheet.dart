@@ -12,6 +12,7 @@ class FilterBottomSheet extends StatelessWidget {
       required void Function() removeFilter}) {
     showModalBottomSheet(
         context: context,
+        backgroundColor: Colors.white,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
