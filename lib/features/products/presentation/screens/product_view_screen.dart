@@ -41,33 +41,6 @@ class ProductViewScreen extends ConsumerWidget {
           verticalPadding: 12,
           bgColor: Colors.transparent,
           title: '',
-          prefixIcon: Container(
-            width: 45.0,
-            height: 45.0,
-            decoration: BoxDecoration(
-              color: const Color(0xFFFEFEFE),
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF1D1E20).withOpacity(0.1),
-                  spreadRadius: 2,
-                  blurRadius: 8,
-                  offset: const Offset(0, 0), // changes position of shadow
-                ),
-              ],
-            ),
-            child: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-                size: 16,
-              ),
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pop(
-                    context); // You can replace this with your custom action
-              },
-            ),
-          ),
           suffixIcon: Container(
               width: 45.0,
               height: 45.0,
