@@ -19,10 +19,12 @@ class ProductCatalogueScreen extends ConsumerStatefulWidget {
   const ProductCatalogueScreen({super.key});
 
   @override
-  ConsumerState<ProductCatalogueScreen> createState() => _ProductCatalogueScreenState();
+  ConsumerState<ProductCatalogueScreen> createState() =>
+      _ProductCatalogueScreenState();
 }
 
-class _ProductCatalogueScreenState extends ConsumerState<ProductCatalogueScreen> {
+class _ProductCatalogueScreenState
+    extends ConsumerState<ProductCatalogueScreen> {
   int categoryFilter = 0;
   Map<String, dynamic> filterData = {};
   final TextEditingController minPriceController = TextEditingController();
@@ -32,9 +34,9 @@ class _ProductCatalogueScreenState extends ConsumerState<ProductCatalogueScreen>
   @override
   Widget build(BuildContext context) {
     final AsyncValue<List<CategoryModel>> fetchCategories =
-    ref.watch(fetchCategoriesProvider);
+        ref.watch(fetchCategoriesProvider);
     final AsyncValue<List<ProductModel>> fetchProducts =
-    ref.watch(fetchProductsProvider);
+        ref.watch(fetchProductsProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -124,51 +126,51 @@ class _ProductCatalogueScreenState extends ConsumerState<ProductCatalogueScreen>
                 height: 40,
                 child: switch (fetchCategories) {
                   AsyncData(:final value) => ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: value.length, // Number of items in the list
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            categoryFilter = index;
-                          });
-                          filterData['category'] = categoryFilter+1;
-                          ref
-                              .read(fetchProductsProvider.notifier)
-                              .setFilter(filterData);
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          decoration: BoxDecoration(
-                            color: categoryFilter == index
-                                ? AppColors.appOrange
-                                : AppColors.appLight40,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Center(
-                            child: CustomText(
-                              title: value[index].category,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: value.length, // Number of items in the list
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              categoryFilter = index;
+                            });
+                            filterData['category'] = categoryFilter + 1;
+                            ref
+                                .read(fetchProductsProvider.notifier)
+                                .setFilter(filterData);
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            decoration: BoxDecoration(
                               color: categoryFilter == index
-                                  ? Colors.white
-                                  : null,
-                              size: 16,
+                                  ? AppColors.appOrange
+                                  : AppColors.appLight40,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Center(
+                              child: CustomText(
+                                title: value[index].category,
+                                color: categoryFilter == index
+                                    ? Colors.white
+                                    : null,
+                                size: 16,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(
-                        width: 8,
-                      );
-                    },
-                  ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          width: 8,
+                        );
+                      },
+                    ),
                   AsyncError() =>
-                  const Text('Oops, something unexpected happened'),
+                    const Text('Oops, something unexpected happened'),
                   _ => const CustomShimmer(
-                    height: 40,
-                  ),
+                      height: 40,
+                    ),
                 },
               ),
               const SizedBox(
@@ -235,16 +237,16 @@ class _ProductCatalogueScreenState extends ConsumerState<ProductCatalogueScreen>
                       minItemWidth: 160,
                       children: List.generate(
                           value.length,
-                              (index) => ProductDetails(
-                            model: value[index],
-                            onDelete: () {
-                              ref
-                                  .read(fetchProductsProvider.notifier)
-                                  .deleteProduct(
-                                  value[index].id!, filterData);
-                              Navigator.pop(context);
-                            },
-                          )),
+                          (index) => ProductDetails(
+                                model: value[index],
+                                onDelete: () {
+                                  ref
+                                      .read(fetchProductsProvider.notifier)
+                                      .deleteProduct(
+                                          value[index].id!, filterData);
+                                  Navigator.pop(context);
+                                },
+                              )),
                     );
                   },
                   error: (Object error, StackTrace stackTrace) {
@@ -254,8 +256,8 @@ class _ProductCatalogueScreenState extends ConsumerState<ProductCatalogueScreen>
                     return const Text("An error has occurred");
                   },
                   loading: () => const CustomShimmer(
-                    height: 200,
-                  ))
+                        height: 200,
+                      ))
             ],
           ),
         ),

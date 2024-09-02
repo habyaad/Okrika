@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import '../../utils/app_colors.dart';
 
 class LoadingDialog extends StatelessWidget {
   static show(
@@ -15,9 +14,7 @@ class LoadingDialog extends StatelessWidget {
         });
   }
 
-  const LoadingDialog._({
-    Key? key,
-  }) : super(key: key);
+  const LoadingDialog._();
 
   @override
   Widget build(BuildContext context) {
