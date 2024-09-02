@@ -15,14 +15,14 @@ import '../providers/fetch_products_provider.dart';
 import '../widgets/filter_bottomsheet.dart';
 import '../widgets/product_widget.dart';
 
-class ProductCatalogue extends ConsumerStatefulWidget {
-  const ProductCatalogue({super.key});
+class ProductCatalogueScreen extends ConsumerStatefulWidget {
+  const ProductCatalogueScreen({super.key});
 
   @override
-  ConsumerState<ProductCatalogue> createState() => _ProductCatalogueState();
+  ConsumerState<ProductCatalogueScreen> createState() => _ProductCatalogueScreenState();
 }
 
-class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
+class _ProductCatalogueScreenState extends ConsumerState<ProductCatalogueScreen> {
   int categoryFilter = 0;
   Map<String, dynamic> filterData = {};
   final TextEditingController minPriceController = TextEditingController();
@@ -32,14 +32,16 @@ class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
   @override
   Widget build(BuildContext context) {
     final AsyncValue<List<CategoryModel>> fetchCategories =
-        ref.watch(fetchCategoriesProvider);
+    ref.watch(fetchCategoriesProvider);
     final AsyncValue<List<ProductModel>> fetchProducts =
-        ref.watch(fetchProductsProvider);
+    ref.watch(fetchProductsProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "/create-product");
+        },
         backgroundColor: AppColors.appOrange,
         child: const Icon(
           Icons.add,
@@ -122,51 +124,51 @@ class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
                 height: 40,
                 child: switch (fetchCategories) {
                   AsyncData(:final value) => ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: value.length, // Number of items in the list
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              categoryFilter = index;
-                            });
-                            filterData['category'] = categoryFilter;
-                            ref
-                                .read(fetchProductsProvider.notifier)
-                                .setFilter(filterData);
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            decoration: BoxDecoration(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: value.length, // Number of items in the list
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            categoryFilter = index;
+                          });
+                          filterData['category'] = categoryFilter+1;
+                          ref
+                              .read(fetchProductsProvider.notifier)
+                              .setFilter(filterData);
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: categoryFilter == index
+                                ? AppColors.appOrange
+                                : AppColors.appLight40,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Center(
+                            child: CustomText(
+                              title: value[index].category,
                               color: categoryFilter == index
-                                  ? AppColors.appOrange
-                                  : AppColors.appLight40,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Center(
-                              child: CustomText(
-                                title: value[index].category,
-                                color: categoryFilter == index
-                                    ? Colors.white
-                                    : null,
-                                size: 16,
-                              ),
+                                  ? Colors.white
+                                  : null,
+                              size: 16,
                             ),
                           ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(
-                          width: 8,
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(
+                        width: 8,
+                      );
+                    },
+                  ),
                   AsyncError() =>
-                    const Text('Oops, something unexpected happened'),
+                  const Text('Oops, something unexpected happened'),
                   _ => const CustomShimmer(
-                      height: 40,
-                    ),
+                    height: 40,
+                  ),
                 },
               ),
               const SizedBox(
@@ -233,16 +235,16 @@ class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
                       minItemWidth: 160,
                       children: List.generate(
                           value.length,
-                          (index) => ProductDetails(
-                                model: value[index],
-                                onDelete: () {
-                                  ref
-                                      .read(fetchProductsProvider.notifier)
-                                      .deleteProduct(
-                                          value[index].id!, filterData);
-                                  Navigator.pop(context);
-                                },
-                              )),
+                              (index) => ProductDetails(
+                            model: value[index],
+                            onDelete: () {
+                              ref
+                                  .read(fetchProductsProvider.notifier)
+                                  .deleteProduct(
+                                  value[index].id!, filterData);
+                              Navigator.pop(context);
+                            },
+                          )),
                     );
                   },
                   error: (Object error, StackTrace stackTrace) {
@@ -252,8 +254,8 @@ class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
                     return const Text("An error has occurred");
                   },
                   loading: () => const CustomShimmer(
-                        height: 200,
-                      ))
+                    height: 200,
+                  ))
             ],
           ),
         ),
