@@ -10,6 +10,10 @@ class ToastService {
     toastification.show(
       context: context,
       backgroundColor: AppColors.appGreen,
+      icon: const Icon(
+        Icons.info_outline,
+        color: Colors.white,
+      ),
       title: CustomText(
         title: msg,
         color: Colors.white,
@@ -24,6 +28,10 @@ class ToastService {
     toastification.show(
       context: context,
       backgroundColor: AppColors.appRed,
+      icon: const Icon(
+        Icons.info_outline,
+        color: Colors.white,
+      ),
       title: CustomText(
         title: msg,
         color: Colors.white,
