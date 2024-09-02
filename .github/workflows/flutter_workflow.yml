@@ -1,91 +1,91 @@
-## Note: In a yml each level is padded by 2 spaces
-#name: Flutter
-#
-#on:
-#  # Runs this action when you push on master
-#  push:
-#    branches: [ "master" ]
-#
-#
-#jobs:
-#  flutter_job:
-#
-#    # The machine, we can also use windows-latest or ubuntu-latest
-#    # We are choosing macos-latest because we will be also building for iOS
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#
-#      # Clones the project on the machine
-#      - uses: actions/checkout@v4
-#
-#      # Sets up java 11
-#      - uses: actions/setup-java@v4
-#        with:
-#          distribution: 'zulu'
-#          java-version: '18'
-#
-#      # Installs flutter and related dependency on this machine
-#      - name: Setup Flutter
-#        uses: subosito/flutter-action@v2
-#        with:
-#          #channel: 'stable'
-#          flutter-version: '3.22.1'
-#          # ^ If you want to use a specific version of flutter
-#
-#      # Fetches proj dependencies from pub
-#      - name: Install dependencies
-#        run: flutter pub get
-#        # ^ If you want to use a specific version of flutter
-#
-#      # Verifies if the dart code is formatted well
-#      - name: Verify formatting
-#        run: dart format --output=none --set-exit-if-changed .
-#        # --set-exit-if-changed stops execution if the any code is not well formatted
-#        # --output=none prints files which needs to be formatted
-#
-#      # Checks for Symantic errors. Can be configured using analysis_options.yaml
-#      - name: Analyze project source
-#        run: flutter analyze --no-fatal-infos --no-fatal-warnings
-#        # optionally use --fatal-warnings to stop execution if any warnings are found
-#
-#      # Runs unit test
-#      - name: Run tests
-#        run: flutter test
-#
-#      - name: Build apk
-#        run: flutter build apk
-#
-#      - uses: actions/upload-artifact@v1
-#        with:
-#          name: release-apk
-#          path: build/app/outputs/apk/release/app-release.apk
-#
-#      #      - name: Get last release
-#      #        id: last_release
-#      #        run: echo "::set-output name=tag::$(git describe --tags $(git rev-list --tags --max-count=1))"
-#      #
-#      #      - name: Determine next version
-#      #        id: next_version
-#      #        run: echo "::set-output name=next_version::$(echo ${{ steps.last_release.outputs.tag }} | awk -F '.' '{print "v"$1"."$2+1".0"}')"
-#
-#      - name: Create Release
-#        id: create_release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: v1.0.0 #${{ steps.next_version.outputs.next_version }}
-#          release_name: Release v1.0.0 #${{ steps.next_version.outputs.next_version }}
-#          draft: false
-#          prerelease: false
-#      - name: Upload APK
-#        id: upload-release-asset
-#        uses: actions/upload-release-asset@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }}
-#          asset_path: build/app/outputs/apk/release/app-release.apk  # Specify the path to your APK
-#          asset_name: app-release.apk  # Specify the name of the APK
-#          asset_content_type: application/vnd.android.package-archive
+# Note: In a yml each level is padded by 2 spaces
+name: Flutter
+
+on:
+  # Runs this action when you push on master
+  push:
+    branches: [ "master" ]
+
+
+jobs:
+  flutter_job:
+
+    # The machine, we can also use windows-latest or ubuntu-latest
+    # We are choosing macos-latest because we will be also building for iOS
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Clones the project on the machine
+      - uses: actions/checkout@v4
+
+      # Sets up java 11
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '18'
+
+      # Installs flutter and related dependency on this machine
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          #channel: 'stable'
+          flutter-version: '3.22.1'
+          # ^ If you want to use a specific version of flutter
+
+      # Fetches proj dependencies from pub
+      - name: Install dependencies
+        run: flutter pub get
+        # ^ If you want to use a specific version of flutter
+
+      # Verifies if the dart code is formatted well
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+        # --set-exit-if-changed stops execution if the any code is not well formatted
+        # --output=none prints files which needs to be formatted
+
+      # Checks for Symantic errors. Can be configured using analysis_options.yaml
+      - name: Analyze project source
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+        # optionally use --fatal-warnings to stop execution if any warnings are found
+
+      # Runs unit test
+      - name: Run tests
+        run: flutter test
+
+      - name: Build apk
+        run: flutter build apk
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: release-apk
+          path: build/app/outputs/apk/release/app-release.apk
+
+      #      - name: Get last release
+      #        id: last_release
+      #        run: echo "::set-output name=tag::$(git describe --tags $(git rev-list --tags --max-count=1))"
+      #
+      #      - name: Determine next version
+      #        id: next_version
+      #        run: echo "::set-output name=next_version::$(echo ${{ steps.last_release.outputs.tag }} | awk -F '.' '{print "v"$1"."$2+1".0"}')"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.0 #${{ steps.next_version.outputs.next_version }}
+          release_name: Release v1.0.0 #${{ steps.next_version.outputs.next_version }}
+          draft: false
+          prerelease: false
+      - name: Upload APK
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: build/app/outputs/apk/release/app-release.apk  # Specify the path to your APK
+          asset_name: app-release.apk  # Specify the name of the APK
+          asset_content_type: application/vnd.android.package-archive
