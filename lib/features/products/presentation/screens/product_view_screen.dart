@@ -7,12 +7,11 @@ import 'package:okrika/features/products/domain/models/product_model.dart';
 import 'package:okrika/features/products/presentation/providers/fetch_single_product_provider.dart';
 import 'package:okrika/shared/widgets/custom_appbar.dart';
 import 'package:okrika/shared/widgets/custom_text.dart';
-
 import '../../../../shared/utils/app_colors.dart';
 import '../../../../shared/widgets/shimmer.dart';
 
-class ProductView extends ConsumerWidget {
-  const ProductView({
+class ProductViewScreen extends ConsumerWidget {
+  const ProductViewScreen({
     super.key,
   });
 
