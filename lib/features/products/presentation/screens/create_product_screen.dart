@@ -49,6 +49,7 @@ class CreateProductScreen extends ConsumerWidget {
         Navigator.pop(context);
         ToastService.success(context, "Product added successfully");
       } catch (e) {
+        Navigator.pop(context);
         ToastService.error(context, e.toString());
       }
     }
