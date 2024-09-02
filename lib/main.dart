@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:okrika/features/products/presentation/screens/create_product_screen.dart';
 import 'package:okrika/features/splash/splash_screen.dart';
-import 'features/products/presentation/screens/product_catalogue.dart';
-import 'features/products/presentation/screens/product_view.dart';
+import 'features/products/presentation/screens/product_catalogue_screen.dart';
+import 'features/products/presentation/screens/product_view_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,8 +29,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const SplashScreen(),
       routes: {
-        '/product-catalogue': (ctx) => const ProductCatalogue(),
-        '/product-view': (ctx) => const ProductView(),
+        '/product-catalogue': (ctx) => const ProductCatalogueScreen(),
+        '/product-view': (ctx) => const ProductViewScreen(),
+        '/create-product': (ctx) => const CreateProductScreen(),
       },
     );
   }
