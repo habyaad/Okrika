@@ -32,4 +32,10 @@ class ProductCatalogueImpl extends ProductCatalogueRepository {
   Future<void> deleteProduct(int id) {
     return datasource.deleteProduct(id);
   }
+
+  @override
+  Future<void> createNewProduct(Map<String, dynamic> productData) {
+    return datasource.createNewProduct(productData);
+
+  }
 }

@@ -11,6 +11,8 @@ abstract class ProductDataSource {
 
   Future<List<ProductModel>> filterProducts(Map<String, dynamic> filterData);
 
+  Future<void> createNewProduct(Map<String, dynamic> productData);
+
   Future<ProductModel> fetchProduct(int id);
 
   Future<void> deleteProduct(int id);
@@ -91,7 +93,7 @@ class ProductRemoteDataSource implements ProductDataSource {
       List<dynamic> whereArgs = [];
 
       if (filterData.containsKey('category')) {
-        if (filterData['category'] == 0) {
+        if (filterData['category'] == 1) {
         } else {
           whereClause += '${AppStrings.columnCategory} = ?';
           whereArgs.add(filterData['category']);
@@ -144,6 +146,21 @@ class ProductRemoteDataSource implements ProductDataSource {
           where: '${AppStrings.columnId} = ?', whereArgs: [id]);
 
       LoggerService.info("Products:: ${response.toString()}");
+    } catch (e) {
+      LoggerService.error(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> createNewProduct(Map<String, dynamic> productData) async {
+    final Database db = await dbInstance.database;
+
+    try {
+      int response =
+          await db.insert(AppStrings.PRODUCT_TABLE_NAME, productData);
+
+      LoggerService.info("New Product added:: ${response.toString()}");
     } catch (e) {
       LoggerService.error(e.toString());
       rethrow;

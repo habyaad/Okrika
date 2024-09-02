@@ -7,4 +7,5 @@ abstract class ProductCatalogueRepository {
   Future<List<CategoryModel>> fetchCategories();
   Future<List<ProductModel>> filterProducts(Map<String, dynamic> filterData);
   Future<void> deleteProduct(int id);
+  Future<void> createNewProduct(Map<String, dynamic> productData);
 }
