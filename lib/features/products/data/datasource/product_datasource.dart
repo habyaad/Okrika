@@ -13,6 +13,8 @@ abstract class ProductDataSource {
 
   Future<void> createNewProduct(Map<String, dynamic> productData);
 
+  Future<void> editProduct(int id, Map<String, dynamic> productData);
+
   Future<ProductModel> fetchProduct(int id);
 
   Future<void> deleteProduct(int id);
@@ -161,6 +163,21 @@ class ProductRemoteDataSource implements ProductDataSource {
           await db.insert(AppStrings.PRODUCT_TABLE_NAME, productData);
 
       LoggerService.info("New Product added:: ${response.toString()}");
+    } catch (e) {
+      LoggerService.error(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> editProduct(int id, Map<String, dynamic> productData) async {
+    final Database db = await dbInstance.database;
+
+    try {
+      int response = await db.update(AppStrings.PRODUCT_TABLE_NAME, productData,
+          where: '${AppStrings.columnId} = ?', whereArgs: [id]);
+
+      LoggerService.info("Product edited:: ${response.toString()}");
     } catch (e) {
       LoggerService.error(e.toString());
       rethrow;
