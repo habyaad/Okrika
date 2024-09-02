@@ -38,6 +38,14 @@ class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: AppColors.appOrange,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       appBar: CustomAppBar(
         verticalPadding: 10,
         title: "",
