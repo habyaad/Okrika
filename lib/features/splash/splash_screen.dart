@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
             width: 50,
             child: LoadingIndicator(
               indicatorType: Indicator.orbit,
-              colors: [Colors.blueGrey, Colors.redAccent],
+              colors: [Colors.blueGrey, Colors.grey],
               strokeWidth: 2,
             ),
           ),

@@ -52,28 +52,28 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText ?? '',
         hintStyle: const TextStyle(
             color: AppColors.medium300,
-            fontSize: 15,
-            fontWeight: FontWeight.w600),
+            fontSize: 14,
+            fontWeight: FontWeight.w400),
         border: border ??
             OutlineInputBorder(
               borderSide:
                   BorderSide(width: borderSize ?? 1, color: AppColors.appGrey),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
             ),
         errorBorder: OutlineInputBorder(
           borderSide:
               BorderSide(width: borderSize ?? 1, color: AppColors.appGrey),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(
-            color: AppColors.medium200,
+            color: Colors.transparent,
             width: 1.0,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(
             color: AppColors.appOrange,
             width: 1.0,

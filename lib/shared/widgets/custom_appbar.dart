@@ -53,10 +53,40 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: CustomText(
           title: title,
           color: titleColor,
-          size: 20,
-          weight: FontWeight.w500,
+          size: 16,
+          weight: FontWeight.w600,
         ),
-        leading: prefixIcon,
+        leading: prefixIcon ??
+            Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: Container(
+                width: 45.0,
+                height: 45.0,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFEFEFE),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF1D1E20).withOpacity(0.1),
+                      spreadRadius: 2,
+                      blurRadius: 8,
+                      offset: const Offset(0, 0), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    size: 16,
+                  ),
+                  color: Colors.black,
+                  onPressed: () {
+                    Navigator.pop(
+                        context); // You can replace this with your custom action
+                  },
+                ),
+              ),
+            ),
         actions: [suffixIcon ?? const SizedBox()],
       ),
     );

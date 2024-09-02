@@ -15,14 +15,16 @@ import '../providers/fetch_products_provider.dart';
 import '../widgets/filter_bottomsheet.dart';
 import '../widgets/product_widget.dart';
 
-class ProductCatalogue extends ConsumerStatefulWidget {
-  const ProductCatalogue({super.key});
+class ProductCatalogueScreen extends ConsumerStatefulWidget {
+  const ProductCatalogueScreen({super.key});
 
   @override
-  ConsumerState<ProductCatalogue> createState() => _ProductCatalogueState();
+  ConsumerState<ProductCatalogueScreen> createState() =>
+      _ProductCatalogueScreenState();
 }
 
-class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
+class _ProductCatalogueScreenState
+    extends ConsumerState<ProductCatalogueScreen> {
   int categoryFilter = 0;
   Map<String, dynamic> filterData = {};
   final TextEditingController minPriceController = TextEditingController();
@@ -39,7 +41,9 @@ class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "/create-product");
+        },
         backgroundColor: AppColors.appOrange,
         child: const Icon(
           Icons.add,
@@ -130,7 +134,7 @@ class _ProductCatalogueState extends ConsumerState<ProductCatalogue> {
                             setState(() {
                               categoryFilter = index;
                             });
-                            filterData['category'] = categoryFilter;
+                            filterData['category'] = categoryFilter + 1;
                             ref
                                 .read(fetchProductsProvider.notifier)
                                 .setFilter(filterData);

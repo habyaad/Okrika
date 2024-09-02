@@ -22,7 +22,7 @@ class ProductModel {
       name: json['name'],
       price: json['price'].toDouble(),
       // Ensures price is a double
-      category: json['id'],
+      category: json['category'],
       description: json['description'],
       imageUrl: json['imageUrl'],
     );

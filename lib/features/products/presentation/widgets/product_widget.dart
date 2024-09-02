@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:okrika/features/products/presentation/screens/edit_product_screen.dart';
 import 'package:okrika/shared/utils/app_colors.dart';
 import '../../../../shared/widgets/custom_text.dart';
 import '../../../../shared/widgets/dialogs/confirm_dialog.dart';
@@ -66,7 +67,13 @@ class ProductDetails extends StatelessWidget {
                           itemBuilder: (BuildContext context) =>
                               <PopupMenuEntry>[
                             PopupMenuItem(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditProductScreen(model.id!)));
+                              },
                               child: const Text('Edit'),
                             ),
                             PopupMenuItem(

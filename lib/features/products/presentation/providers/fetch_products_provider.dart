@@ -20,10 +20,15 @@ class FetchProducts extends _$FetchProducts {
     state = AsyncData(await productRepo.filterProducts(filterData));
   }
 
-  Future<void> addProduct(Map<String, dynamic> filterData) async {
+  Future<void> addProduct(Map<String, dynamic> productData) async {
     final ProductCatalogueRepository productRepo =
         ref.read(productCatalogueProvider);
-    state = AsyncData(await productRepo.filterProducts(filterData));
+    try {
+      await productRepo.createNewProduct(productData);
+      ref.invalidateSelf();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> deleteProduct(int id, Map<String, dynamic>? filterData) async {
@@ -32,6 +37,17 @@ class FetchProducts extends _$FetchProducts {
     await productRepo.deleteProduct(id);
     if (filterData != null) {
       setFilter(filterData);
+    }
+  }
+
+  Future<void> editProduct(int id, Map<String, dynamic> productData) async {
+    final ProductCatalogueRepository productRepo =
+        ref.read(productCatalogueProvider);
+    try {
+      await productRepo.editProduct(id, productData);
+      ref.invalidateSelf();
+    } catch (e) {
+      rethrow;
     }
   }
 }
