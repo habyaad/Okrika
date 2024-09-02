@@ -4,7 +4,7 @@ import 'package:okrika/shared/utils/app_strings.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class DatabaseHelperImpl extends DatabaseHelperRepo {
+class DatabaseHelperImpl implements DatabaseHelperRepo {
   static const _databaseVersion = 1;
 
   // make this a singleton class

@@ -3,7 +3,7 @@ import 'package:okrika/features/products/domain/models/category_model.dart';
 import 'package:okrika/features/products/domain/models/product_model.dart';
 import 'package:okrika/features/products/domain/repositories/product_catalogue_repo.dart';
 
-class ProductCatalogueImpl extends ProductCatalogueRepository {
+class ProductCatalogueImpl implements ProductCatalogueRepository {
   final ProductDataSource datasource;
 
   ProductCatalogueImpl(this.datasource);
