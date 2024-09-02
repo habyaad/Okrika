@@ -39,4 +39,15 @@ class FetchProducts extends _$FetchProducts {
       setFilter(filterData);
     }
   }
+
+  Future<void> editProduct(int id, Map<String, dynamic> productData) async {
+    final ProductCatalogueRepository productRepo =
+        ref.read(productCatalogueProvider);
+    try {
+      await productRepo.editProduct(id, productData);
+      ref.invalidateSelf();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
