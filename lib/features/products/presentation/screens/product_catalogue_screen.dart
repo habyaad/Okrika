@@ -245,14 +245,14 @@ class _ProductCatalogueScreenState
                       children: List.generate(
                           value.length,
                           (index) => ProductDetails(
-                            model: value[index],
-                            onDelete: () {
-                              ref
-                                  .read(fetchProductsProvider.notifier)
-                                  .deleteProduct(value[index].id!);
-                              Navigator.pop(context);
-                            },
-                          )),
+                                model: value[index],
+                                onDelete: () {
+                                  ref
+                                      .read(fetchProductsProvider.notifier)
+                                      .deleteProduct(value[index].id!);
+                                  Navigator.pop(context);
+                                },
+                              )),
                     );
                   },
                   error: (Object error, StackTrace stackTrace) {
