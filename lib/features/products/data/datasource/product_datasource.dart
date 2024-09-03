@@ -56,6 +56,7 @@ class ProductRemoteDataSource implements ProductDataSource {
         AppStrings.columnId,
         AppStrings.columnName,
         AppStrings.columnPrice,
+        AppStrings.columnCategory,
         AppStrings.columnCoverImage
       ]);
       LoggerService.info("Products:: ${response.toString()}");
@@ -124,6 +125,7 @@ class ProductRemoteDataSource implements ProductDataSource {
           AppStrings.columnId,
           AppStrings.columnName,
           AppStrings.columnPrice,
+          AppStrings.columnCategory,
           AppStrings.columnCoverImage
         ],
         where: whereClause.isNotEmpty ? whereClause : null,

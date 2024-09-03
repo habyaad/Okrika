@@ -42,7 +42,6 @@ class ProductDetails extends StatelessWidget {
                 type: MaterialType.transparency,
                 child: AnimatedContainer(
                     duration: const Duration(milliseconds: 700),
-                    width: 160,
                     height: 138,
                     decoration: BoxDecoration(
                         color: Colors.grey,

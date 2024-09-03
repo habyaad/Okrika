@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:okrika/features/products/presentation/providers/fetch_categories_provider.dart';
+import 'package:okrika/features/products/presentation/providers/filter_provider.dart';
 import 'package:okrika/features/products/presentation/widgets/carousel_widget.dart';
 import 'package:okrika/shared/utils/app_colors.dart';
 import 'package:okrika/shared/widgets/custom_appbar.dart';
@@ -26,7 +27,6 @@ class ProductCatalogueScreen extends ConsumerStatefulWidget {
 class _ProductCatalogueScreenState
     extends ConsumerState<ProductCatalogueScreen> {
   int categoryFilter = 0;
-  Map<String, dynamic> filterData = {};
   final TextEditingController minPriceController = TextEditingController();
   final TextEditingController maxPriceController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -134,10 +134,13 @@ class _ProductCatalogueScreenState
                             setState(() {
                               categoryFilter = index;
                             });
-                            filterData['category'] = categoryFilter + 1;
+
+                            ref
+                                .read(filterProvider.notifier)
+                                .setKey('category', categoryFilter + 1);
                             ref
                                 .read(fetchProductsProvider.notifier)
-                                .setFilter(filterData);
+                                .setFilter();
                           },
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
@@ -188,28 +191,32 @@ class _ProductCatalogueScreenState
                         onPressed: () {
                           //formKey.currentState!.save();
                           if (minPriceController.text.isNotEmpty) {
-                            filterData['minPrice'] =
-                                double.tryParse(minPriceController.text);
+                            ref.read(filterProvider.notifier).setKey('minPrice',
+                                double.tryParse(minPriceController.text));
                           } else {
-                            filterData.remove("minPrice");
+                            ref
+                                .read(filterProvider.notifier)
+                                .removeKey("minPrice");
                           }
                           if (maxPriceController.text.isNotEmpty) {
-                            filterData['maxPrice'] =
-                                double.tryParse(maxPriceController.text);
+                            ref.read(filterProvider.notifier).setKey('maxPrice',
+                                double.tryParse(maxPriceController.text));
                           } else {
-                            filterData.remove("maxPrice");
+                            ref
+                                .read(filterProvider.notifier)
+                                .removeKey("maxPrice");
                           }
-                          ref
-                              .read(fetchProductsProvider.notifier)
-                              .setFilter(filterData);
+                          ref.read(fetchProductsProvider.notifier).setFilter();
                           Navigator.pop(context);
                         },
                         removeFilter: () {
-                          filterData.remove("minPrice");
-                          filterData.remove("maxPrice");
                           ref
-                              .read(fetchProductsProvider.notifier)
-                              .setFilter(filterData);
+                              .read(filterProvider.notifier)
+                              .removeKey("minPrice");
+                          ref
+                              .read(filterProvider.notifier)
+                              .removeKey("maxPrice");
+                          ref.read(fetchProductsProvider.notifier).setFilter();
                           Navigator.pop(context);
                         },
                       );
@@ -237,15 +244,16 @@ class _ProductCatalogueScreenState
                       minItemWidth: 160,
                       children: List.generate(
                           value.length,
-                          (index) => ProductDetails(
-                                model: value[index],
-                                onDelete: () {
-                                  ref
-                                      .read(fetchProductsProvider.notifier)
-                                      .deleteProduct(
-                                          value[index].id!, filterData);
-                                  Navigator.pop(context);
-                                },
+                          (index) => Align(
+                                child: ProductDetails(
+                                  model: value[index],
+                                  onDelete: () {
+                                    ref
+                                        .read(fetchProductsProvider.notifier)
+                                        .deleteProduct(value[index].id!);
+                                    Navigator.pop(context);
+                                  },
+                                ),
                               )),
                     );
                   },
