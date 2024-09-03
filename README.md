@@ -18,15 +18,15 @@ The project is organized using a feature-first approach with a clean architectur
 
 ### Getting Started
 
- -  Prerequisites 
+#### Prerequisites 
    - Flutter SDK installed on your local machine. 
    - A code editor like VSCode or Android Studio.
 
- -  Setup Instructions
+#### Setup Instructions
 
    - Clone the repository:
 
-        <code> git clone https://github.com/your-username/product-catalog-app.git </code>
+        <code> git clone https://github.com/your-username/product-catalog-app.git </code> <br>
         <code> cd product-catalog-app </code>
      
    -  Install dependencies:
