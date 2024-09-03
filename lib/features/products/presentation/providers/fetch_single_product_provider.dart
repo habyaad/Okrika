@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'fetch_single_product_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 Future<ProductModel> fetchSingleProduct(
     FetchSingleProductRef ref, int id) async {
   final ProductCatalogueRepository productRepo =
