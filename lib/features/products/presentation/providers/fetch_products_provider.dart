@@ -25,10 +25,9 @@ class FetchProducts extends _$FetchProducts {
   Future<void> addProduct(Map<String, dynamic> productData) async {
     final ProductCatalogueRepository productRepo =
         ref.read(productCatalogueProvider);
-    final Map<String, dynamic> filterData = ref.read(filterProvider);
     try {
       await productRepo.createNewProduct(productData);
-      setFilter();
+      await setFilter();
     } catch (e) {
       rethrow;
     }
@@ -39,18 +38,20 @@ class FetchProducts extends _$FetchProducts {
   ) async {
     final ProductCatalogueRepository productRepo =
         ref.read(productCatalogueProvider);
-    await productRepo.deleteProduct(id);
-    setFilter();
+    try {
+      await productRepo.deleteProduct(id);
+      await setFilter();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> editProduct(int id, Map<String, dynamic> productData) async {
     final ProductCatalogueRepository productRepo =
         ref.read(productCatalogueProvider);
-    final Map<String, dynamic> filterData = ref.read(filterProvider);
-
     try {
       await productRepo.editProduct(id, productData);
-      setFilter();
+      await setFilter();
     } catch (e) {
       rethrow;
     }
