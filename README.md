@@ -66,5 +66,17 @@ The project is organized using a feature-first approach with a clean architectur
     The clean separation of these concerns allows for better testability and code maintenance.
 
 ### Previews
+<img height="400" alt="Screen Shot 2024-09-03 at 23 15 35" src="https://github.com/user-attachments/assets/37ceba84-fcf6-49c0-9f68-f84850af5932">
+
+<img height="400" alt="Screen Shot 2024-09-03 at 23 09 15" src="https://github.com/user-attachments/assets/20c3a4ca-ab9c-4cd5-ac67-3f31e5af4fa3">
+
+<img height="400" alt="Screen Shot 2024-09-03 at 23 11 25" src="https://github.com/user-attachments/assets/3204a098-998d-43d0-b0a5-a55332d72e49">
+
+<img height="400" alt="Screen Shot 2024-09-03 at 23 12 32" src="https://github.com/user-attachments/assets/b1db2469-9532-454b-bbad-4293fc6c04f5">
+
+<img height="400" alt="Screen Shot 2024-09-03 at 23 12 55" src="https://github.com/user-attachments/assets/7b760119-c381-4dfd-b83a-8e60732eb08b">
+
+<img height="400" alt="Screen Shot 2024-09-03 at 23 16 20" src="https://github.com/user-attachments/assets/3e7d84b8-e506-4e49-ba84-a3c1be28c970">
+
 
 ### Link to download apk - 
