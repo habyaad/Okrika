@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:okrika/features/products/domain/models/product_model.dart';
 import 'package:okrika/features/products/presentation/providers/fetch_single_product_provider.dart';
 import 'package:okrika/shared/widgets/custom_appbar.dart';
@@ -56,10 +55,7 @@ class ProductViewScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              child: SvgPicture.asset(
-                "assets/svgs/Bag.svg",
-                fit: BoxFit.scaleDown,
-              )),
+              child: const Icon(Icons.favorite_border_rounded)),
         ),
         body: fetchProduct.when(
             data: (value) {
