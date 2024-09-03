@@ -52,6 +52,8 @@ The project is organized using a feature-first approach with a clean architectur
   - No Offline Sync: Given the local-only database setup, offline synchronization was not implemented, although the architecture allows for easy extension if needed in the future. 
   - Limited Animations: To maintain simplicity and focus on core functionality, the use of animations was kept minimal.
 
+  - Quality picture: I could not really outsource for high quality pictures so, i worked with what i had.
+
 #### State Management Solution
     The app uses Riverpod for state management, chosen for its ability to decouple business logic from the UI and handle complex state scenarios with ease. Riverpod provides a robust and scalable solution for managing the app's state, particularly with the use of StateNotifier and FutureProvider to manage asynchronous operations and UI updates.
 
@@ -63,3 +65,6 @@ The project is organized using a feature-first approach with a clean architectur
 
     The clean separation of these concerns allows for better testability and code maintenance.
 
+### Previews
+
+### Link to download apk - 
