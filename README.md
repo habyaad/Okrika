@@ -26,8 +26,8 @@ The project is organized using a feature-first approach with a clean architectur
 
    - Clone the repository:
 
-        <code> git clone https://github.com/your-username/product-catalog-app.git </code> <br>
-        <code> cd product-catalog-app </code>
+        <code> git clone https://github.com/habyaad/Okrika.git </code> <br>
+        <code> cd Okrika </code>
      
    -  Install dependencies:
       <code> flutter pub get </code>
