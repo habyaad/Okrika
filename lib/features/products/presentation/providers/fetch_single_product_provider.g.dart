@@ -7,7 +7,7 @@ part of 'fetch_single_product_provider.dart';
 // **************************************************************************
 
 String _$fetchSingleProductHash() =>
-    r'a6af9d409d51ac84854e7850af9015dc75b27d46';
+    r'6993d52ce9f06d31ffb4402724573123884d4608';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -73,7 +73,8 @@ class FetchSingleProductFamily extends Family<AsyncValue<ProductModel>> {
 }
 
 /// See also [fetchSingleProduct].
-class FetchSingleProductProvider extends FutureProvider<ProductModel> {
+class FetchSingleProductProvider
+    extends AutoDisposeFutureProvider<ProductModel> {
   /// See also [fetchSingleProduct].
   FetchSingleProductProvider(
     int id,
@@ -125,7 +126,7 @@ class FetchSingleProductProvider extends FutureProvider<ProductModel> {
   }
 
   @override
-  FutureProviderElement<ProductModel> createElement() {
+  AutoDisposeFutureProviderElement<ProductModel> createElement() {
     return _FetchSingleProductProviderElement(this);
   }
 
@@ -143,13 +144,14 @@ class FetchSingleProductProvider extends FutureProvider<ProductModel> {
   }
 }
 
-mixin FetchSingleProductRef on FutureProviderRef<ProductModel> {
+mixin FetchSingleProductRef on AutoDisposeFutureProviderRef<ProductModel> {
   /// The parameter `id` of this provider.
   int get id;
 }
 
 class _FetchSingleProductProviderElement
-    extends FutureProviderElement<ProductModel> with FetchSingleProductRef {
+    extends AutoDisposeFutureProviderElement<ProductModel>
+    with FetchSingleProductRef {
   _FetchSingleProductProviderElement(super.provider);
 
   @override
