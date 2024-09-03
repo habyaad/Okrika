@@ -237,16 +237,18 @@ class _ProductCatalogueScreenState
                       minItemWidth: 160,
                       children: List.generate(
                           value.length,
-                          (index) => ProductDetails(
-                                model: value[index],
-                                onDelete: () {
-                                  ref
-                                      .read(fetchProductsProvider.notifier)
-                                      .deleteProduct(
-                                          value[index].id!, filterData);
-                                  Navigator.pop(context);
-                                },
-                              )),
+                          (index) => Align(
+                            child: ProductDetails(
+                                  model: value[index],
+                                  onDelete: () {
+                                    ref
+                                        .read(fetchProductsProvider.notifier)
+                                        .deleteProduct(
+                                            value[index].id!, filterData);
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                          )),
                     );
                   },
                   error: (Object error, StackTrace stackTrace) {
