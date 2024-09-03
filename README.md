@@ -79,4 +79,4 @@ The project is organized using a feature-first approach with a clean architectur
 <img height="400" alt="Screen Shot 2024-09-03 at 23 16 20" src="https://github.com/user-attachments/assets/3e7d84b8-e506-4e49-ba84-a3c1be28c970">
 
 
-### Link to download apk - 
+### Link to download apk - <a href="https://github.com/habyaad/Okrika/releases/download/v1.0.2/app-release.apk">Download Apk</a>
