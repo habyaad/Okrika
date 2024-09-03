@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:okrika/features/products/domain/models/category_model.dart';
 import 'package:okrika/features/products/domain/models/product_model.dart';
+import 'package:okrika/features/products/presentation/providers/fetch_categories_provider.dart';
 import 'package:okrika/features/products/presentation/providers/fetch_products_provider.dart';
 import 'package:okrika/features/products/presentation/providers/fetch_single_product_provider.dart';
 import 'package:okrika/features/products/presentation/providers/filter_provider.dart';
@@ -115,6 +117,43 @@ void main() {
       for (final product in filteredProducts) {
         expect(product.category, equals(2));
       }
+    });
+  });
+  group('FetchSingleProductProvider Tests', () {
+    late ProviderContainer container;
+
+    setUp(() {
+      // Create a new ProviderContainer for each test.
+      container = createContainer();
+    });
+
+    test('Fetch single product returns a product', () async {
+      await container.read(fetchProductsProvider.notifier).addProduct({
+        'name': 'Old Product Name',
+        'price': 500,
+        'category': 1,
+        'description': 'An old product description.',
+        'imageUrl': 'product-2',
+      });
+
+      final products = await container.read(fetchProductsProvider.future);
+      final product = await container
+          .read(fetchSingleProductProvider(products.last.id!).future);
+      expect(product, isA<ProductModel>());
+    });
+  });
+
+  group('FetchCategoriesProvider Tests', () {
+    late ProviderContainer container;
+
+    setUp(() {
+      // Create a new ProviderContainer for each test.
+      container = createContainer();
+    });
+
+    test('Fetch categories returns a list of category', () async {
+      final categories = await container.read(fetchCategoriesProvider.future);
+      expect(categories, isA<List<CategoryModel>>());
     });
   });
 }
